@@ -1,0 +1,640 @@
+@import url("https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;700&display=swap");
+:root {
+  --clr-primary: #1d1d1d;
+  --clr-gray: #3c3c3b;
+  --clr-pink: #ffa590;
+  --clr-aliceblue: #f0f8ff;
+  --clr-lightBlue: #9fcbee;
+  --clr-blue: #6497bf;
+  --clr-navy: #202a44;
+  --clr-red: #d8031c;
+
+  --ff-primary: "Figtree", sans-serif;
+  --ff-hollow: "Londrina Outline", cursive;
+  /* --ff-light: "proxima nova light", sans-serif; */
+  /* --ff-bold: "proxima nova bold", sans-serif; */
+
+  --fw-light: 400;
+  --fw-semi-bold: 500;
+  --fw-bold: 900;
+  /*size*/
+  --fs-200: 0.8125rem;
+  --fs-300: 0.875rem;
+  --fs-400: 1rem;
+  --fs-500: 1.25rem;
+  --fs-600: 1.6rem;
+  --fs-700: 2.25rem;
+  --fs-800: 3rem;
+  --fs-900: 4.5rem;
+  --fs-1000: 7rem;
+
+  --fs-body: var(--fs-400);
+  --fs-primary-heading: var(--fs-900);
+  --fs-secondary-heading: var(--fs-800);
+  --fs-heading: var(--fs-700);
+  --fs-nav: var(--fs-500);
+  --fs-paragraph: var(--fs-400);
+  --fs-paragraph-lg: var(--fs-600);
+  --fs-card-title: var(--fs-500);
+
+  --size-100: 0.25rem;
+  --size-200: 0.5rem;
+  --size-300: 0.75rem;
+  --size-400: 1rem;
+  --size-500: 1.25rem;
+  --size-600: 1.5rem;
+  --size-700: 2rem;
+  --size-800: 2.5rem;
+  --size-900: 3rem;
+}
+
+@media (min-width: 50em) {
+  :root {
+    --fs-primary-heading: var(--fs-1000);
+    --fs-secondary-heading: var(--fs-900);
+    --fs-heading: var(--fs-800);
+    --fs-paragraph: var(--fs-500);
+  }
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  scroll-behavior: smooth;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  /* background-color: hsla(206, 42%, 57%, 0.376); */
+  /* background-color: #bde0eb; */
+  background-color: #c6e4ee;
+  font-family: var(--ff-primary);
+  overflow-x: hidden;
+}
+
+/* A elements that don't have a class get default styles */
+a {
+  text-decoration: none;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* general styling */
+.even-col {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 50em) {
+  .even-col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.container {
+  --max-width: 1450px;
+  --padding: 2rem;
+
+  width: min(var(--max-width), 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem var(--padding);
+}
+/* NAVBAR STYLING */
+.logo {
+  width: 3.5rem;
+}
+.primary-nav__links li > a {
+  color: var(--clr-primary);
+  transition: all 350ms ease-in-out;
+}
+.primary-nav__links li > a.active {
+  color: var(--clr-red);
+}
+.primary-nav__links li > a:hover {
+  color: var(--clr-red);
+}
+.primary-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+@media (min-width: 50em) {
+  .primary-navigation {
+    padding: 0 2rem;
+  }
+}
+
+.primary-nav__links li:not(:last-child) {
+  padding-right: 2rem;
+}
+@media (min-width: 50em) {
+  .nav-toggle-btn {
+    display: none;
+  }
+}
+.primary-nav__links {
+  display: flex;
+}
+@media (max-width: 50em) {
+  .nav-toggle-btn {
+    display: block;
+    position: absolute;
+    aspect-ratio: 1;
+    top: 2.5rem;
+    right: 3rem;
+  }
+  .primary-nav__links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 30%;
+    padding: 10rem 0 0 3rem;
+    transform: translateX(100%);
+    transition: all 500ms ease-out;
+    z-index: 999;
+  }
+  .primary-nav__links[visible] {
+    transform: translateX(0%);
+  }
+  .primary-nav__links li {
+    padding: 1rem 0;
+  }
+  .primary-nav__links {
+    background-color: hsl(206, 42%, 57%, 0.8);
+  }
+  @supports (backdrop-filter: blur(1rem)) {
+    .primary-nav__links {
+      background-color: hsl(206, 42%, 57%, 0.4);
+      backdrop-filter: blur(0.75rem);
+    }
+  }
+}
+
+/* toggle-btn */
+.nav-toggle-btn {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  z-index: 9999;
+}
+.bars {
+  background-color: var(--clr-primary);
+  height: 5px;
+  width: 2rem;
+  border-radius: 5px;
+}
+.bar-1,
+.bar-2,
+.bar-3 {
+  margin: 5px;
+  transition: all 300ms linear;
+}
+.bar-1[active] {
+  transform: rotate(45deg) translateY(0.5rem) translateX(0.5rem);
+  background-color: var(--clr-red);
+}
+.bar-2[active] {
+  opacity: 0;
+}
+.bar-3[active] {
+  transform: rotate(-45deg) translateY(-0.4rem) translateX(0.4rem);
+  background-color: var(--clr-red);
+}
+
+.berninaExpress-bg {
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+
+  background-image: url("./images/Bernina-Express-Switzerland.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+/* end of toggle-btn */
+
+.theRailway {
+  padding: 10rem 0 0 3rem;
+}
+
+.one {
+  color: var(--clr-aliceblue);
+  background-color: hsl(223, 36%, 20%, 0.9);
+  padding: 0 4rem;
+  border-radius: 10rem 0 0 0;
+  backdrop-filter: blur(0.75rem);
+}
+.two {
+  color: #d8031c;
+  margin-left: 1rem;
+  background-color: hsl(206, 42%, 57%, 0.7);
+  padding: 0 4rem;
+  border-radius: 0 0 10rem 0;
+}
+@media (min-width: 50em) {
+  .theRailway {
+    padding: 14rem 0 0 5rem;
+  }
+
+  .one {
+    padding: 0 6rem;
+    border-radius: 10rem 0 0 0;
+    background-color: hsl(223, 36%, 20%, 0.8);
+  }
+  .two {
+    margin-left: 7rem;
+    padding: 0 6rem;
+    background-color: hsl(206, 42%, 57%, 0.6);
+  }
+}
+/* tickets section  */
+/* .tickets-section {
+  margin: 0 1rem;
+} */
+.bernina-ticket,
+.glacier-ticket {
+  border: 1px solid var(--clr-red);
+  text-align: center;
+  padding: 3rem 2rem;
+}
+.bernina-ticket h2,
+.glacier-ticket h2 {
+  padding: 2rem 0;
+}
+.section-padding {
+  padding: 1rem;
+}
+@media (min-width: 70em) {
+  .section-padding {
+    padding: 5rem;
+  }
+  .bernina-ticket,
+  .glacier-ticket {
+    padding: 5rem 4rem;
+  }
+}
+
+.bernina-ticket p,
+.glacier-ticket p {
+  padding: 1rem 0;
+}
+.bernina-ticket {
+  border-radius: 10rem 0 0 0;
+  margin-bottom: 1rem;
+}
+@media (min-width: 50em) {
+  .bernina-ticket {
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+  }
+}
+.buy-ticket {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 2rem;
+}
+.buy-ticket p {
+  text-decoration: underline;
+}
+.buy-ticket button,
+.book-now-btn,
+.submit-btn {
+  background: transparent;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  color: var(--clr-aliceblue);
+  transition: all 350ms ease-in-out;
+}
+.book-now-btn {
+  margin: 1rem 0;
+  background-color: var(--clr-red);
+}
+.submit-btn {
+  background-color: var(--clr-blue);
+}
+.buy-ticket button {
+  border-radius: 5rem 0 0 0;
+  background-color: var(--clr-red);
+}
+.buy-ticket button:hover,
+.book-now-btn:hover {
+  background-color: var(--clr-pink);
+  color: var(--clr-red);
+}
+/* TOUR section  */
+
+.tour__text-wrapper .col-1 {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  color: var(--clr-red);
+}
+.tour__text-wrapper .col-2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: url("./images/bernin-interior.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 300px;
+}
+.col-2 h1 {
+  color: var(--clr-aliceblue);
+}
+
+@media (min-width: 50em) {
+  .tour__text-wrapper .col-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: var(--clr-navy);
+    color: aliceblue;
+    padding: 6rem;
+  }
+  .tour__text-wrapper .col-2 {
+    display: flex;
+    justify-content: flex-start;
+    background-color: var(--clr-lightBlue);
+    padding: 6rem 6rem 0rem 0;
+  }
+}
+.tour__text-wrapper .col-1 p {
+  max-width: 300px;
+}
+/* about and dinner section  */
+.divider {
+  border-top: 2px solid var(--clr-red);
+}
+.about {
+  padding: 2rem 0;
+}
+.about__circular-tour {
+  max-width: 500px;
+  margin-top: 2rem;
+}
+.about__info-tour {
+  background-color: #c6e4ee;
+}
+@media (max-width: 50em) {
+  .about__info-tour,
+  .about__circular-tour {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .about__info-tour {
+    padding-bottom: 4rem;
+  }
+}
+@media (min-width: 50em) {
+  .about {
+    padding: 4rem 0;
+  }
+  .about__circular-tour {
+    margin-left: 4rem;
+    margin-top: 0;
+  }
+}
+.about__info-tour {
+  max-width: 500px;
+}
+.about__info-tour p {
+  padding: 1rem 0;
+}
+@media (min-width: 50em) {
+  .about__info-tour {
+    transform: translate(15rem, 10rem);
+  }
+  .dinner-section {
+    margin-bottom: 7rem;
+  }
+}
+
+@media (max-width: 50em) {
+  .dining-img {
+    margin: 0 auto;
+    padding-bottom: 2rem;
+  }
+}
+/* footer styling */
+.footer {
+  padding: 5rem 7rem;
+}
+.footer-nav__links a {
+  color: var(--clr-aliceblue);
+  transition: all 350ms ease-in-out;
+}
+.footer-nav__links a:hover {
+  color: var(--clr-blue);
+  transition: all 350ms ease-in-out;
+}
+.footer-nav__links li {
+  padding: 0.55rem 0;
+}
+
+@media (min-width: 50em) {
+  .footer-nav__links {
+    columns: 2;
+    padding: 2rem 0;
+  }
+  .footer-nav__links li {
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.footer__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+}
+.subscribe {
+  display: flex;
+  flex-direction: column;
+}
+.subscribe input,
+.subscribe input,
+.submit-btn {
+  margin: 0.75rem 0;
+}
+.subscribe input {
+  border-radius: 2px;
+  padding: 0.35rem 0.5rem;
+  border: 0;
+}
+@media (max-width: 50em) {
+  .even-col-switch {
+    display: grid;
+    grid-template-areas:
+      "one"
+      "two";
+  }
+  .grid-switch:nth-child(1) {
+    grid-area: two;
+  }
+  .grid-switch:nth-child(2) {
+    grid-area: one;
+  }
+}
+@media (min-width: 50em) {
+  .even-col-switch {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/*Utility classes*/
+.text-center {
+  text-align: center;
+}
+.ff-primary {
+  font-family: var(--ff-primary);
+}
+.ff-hollow {
+  font-family: var(--ff-hollow);
+}
+/*text color*/
+.text-primary {
+  color: var(--clr-primary);
+}
+.text-gray {
+  color: var(--clr-gray);
+}
+.text-aliceblue {
+  color: var(--clr-aliceblue);
+}
+.text-blue {
+  color: var(--clr-blue);
+}
+.text-lightBlue {
+  color: var(--clr-lightBlue);
+}
+.text-navy {
+  color: var(--clr-navy);
+}
+.text-red {
+  color: var(--clr-red);
+}
+
+/* bg  */
+.bg-blue {
+  background-color: var(--clr-blue);
+}
+.bg-navy {
+  background-color: var(--clr-navy);
+}
+.padding-block-400 {
+  padding: var(--size-400);
+}
+.padding-block-500 {
+  padding: var(--size-500);
+}
+.padding-block-600 {
+  padding: var(--size-600);
+}
+.padding-block-700 {
+  padding: var(--size-700);
+}
+.padding-block-800 {
+  padding: var(--size-800);
+}
+.padding-block-900 {
+  padding: var(--size-900);
+}
+.margin-block-900 {
+  margin: var(--size-900);
+}
+
+.fw-bold {
+  font-weight: var(--fw-bold);
+}
+.fw-semi-bold {
+  font-weight: var(--fw-semi-bold);
+}
+
+/*font sizes*/
+
+.fs-body {
+  font-size: var(--fs-body);
+}
+.fs-primary-heading {
+  font-size: var(--fs-primary-heading);
+}
+.fs-secondary-heading {
+  font-size: var(--fs-secondary-heading);
+}
+.fs-heading {
+  font-size: var(--fs-heading);
+}
+.fs-nav {
+  font-size: var(--fs-nav);
+}
+.fs-paragraph {
+  font-size: var(--fs-paragraph);
+}
+.fs-paragraph-lg {
+  font-size: var(--fs-paragraph-lg);
+}
+.fs-card-title {
+  font-size: var(--fs-card-title);
+}
